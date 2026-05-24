@@ -43,7 +43,7 @@ $upcoming_interviews = $upcoming->fetchAll();
 
         <div class="table-wrap">
           <div class="table-head">
-            <h3>👥 Dernières candidatures</h3>
+            <h3>Dernières candidatures</h3>
             <a href="/siteadam/entreprise/candidatures.php" class="btn btn-outline btn-sm">Voir tout</a>
           </div>
           <?php if(empty($recent_apps)): ?>
