@@ -5,7 +5,6 @@ $cp = $pdo->prepare("SELECT id FROM company_profiles WHERE user_id=?");
 $cp->execute([$_SESSION['user_id']]);
 $cid = $cp->fetchColumn();
 
-// Toggle status
 if(isset($_GET['toggle'])) {
     $oid = intval($_GET['toggle']);
     $cur = $pdo->prepare("SELECT status FROM job_offers WHERE id=? AND company_id=?");
@@ -15,7 +14,6 @@ if(isset($_GET['toggle'])) {
     $pdo->prepare("UPDATE job_offers SET status=? WHERE id=? AND company_id=?")->execute([$new,$oid,$cid]);
     header('Location: offres.php'); exit;
 }
-// Delete
 if(isset($_GET['delete'])) {
     $pdo->prepare("DELETE FROM job_offers WHERE id=? AND company_id=?")->execute([intval($_GET['delete']),$cid]);
     header('Location: offres.php'); exit;
@@ -32,16 +30,16 @@ $all_offers = $offers->fetchAll();
   <?php include '../includes/sidebar_company.php'; ?>
   <div class="dash-content">
     <div class="dash-header">
-      <h1>📢 Mes offres publiées</h1>
+      <h1> Mes offres publiées</h1>
       <a href="nouvelle-offre.php" class="btn btn-primary btn-sm">➕ Nouvelle offre</a>
     </div>
     <div class="dash-body">
       <?php if(empty($all_offers)): ?>
       <div class="empty-state">
-        <div class="empty-icon">📋</div>
+        <div class="empty-icon"></div>
         <h3>Aucune offre publiée</h3>
         <p>Commencez par publier votre première offre de stage ou d'emploi.</p>
-        <a href="nouvelle-offre.php" class="btn btn-primary" style="margin-top:1rem">➕ Publier une offre</a>
+        <a href="nouvelle-offre.php" class="btn btn-primary" style="margin-top:1rem"> Publier une offre</a>
       </div>
       <?php else: ?>
       <div class="table-wrap">
@@ -51,16 +49,16 @@ $all_offers = $offers->fetchAll();
           <?php foreach($all_offers as $o): ?>
           <tr>
             <td><strong><?= htmlspecialchars($o['title']) ?></strong><br><small style="color:var(--muted)"><?= htmlspecialchars($o['sector']??'') ?></small></td>
-            <td><span class="tag tag-type" style="font-size:.75rem"><?= $o['offer_type']==='stage'?'🎓 Stage':'💼 Emploi' ?></span></td>
+            <td><span class="tag tag-type" style="font-size:.75rem"><?= $o['offer_type']==='stage'?' Stage':'Emploi' ?></span></td>
             <td style="font-size:.85rem"><?= htmlspecialchars($o['location']??'-') ?></td>
             <td><a href="candidatures.php?offer=<?= $o['id'] ?>" style="color:var(--primary);font-weight:700"><?= $o['nb_apps'] ?> candidat(s)</a></td>
-            <td><span class="badge badge-<?= $o['status'] ?>"><?= $o['status']==='active'?'✅ Active':'🔒 Fermée' ?></span></td>
+            <td><span class="badge badge-<?= $o['status'] ?>"><?= $o['status']==='active'?' Active':' Fermée' ?></span></td>
             <td style="font-size:.82rem;color:var(--muted)"><?= date('d/m/Y',strtotime($o['created_at'])) ?></td>
             <td>
               <div style="display:flex;gap:.5rem">
-                <a href="modifier-offre.php?id=<?= $o['id'] ?>" class="btn btn-outline btn-sm">✏️</a>
-                <a href="?toggle=<?= $o['id'] ?>" class="btn btn-sm" style="background:<?= $o['status']==='active'?'#fef9c3;color:#854d0e':'#dcfce7;color:#166534' ?>"><?= $o['status']==='active'?'🔒':'✅' ?></a>
-                <a href="?delete=<?= $o['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Supprimer cette offre ?')">🗑</a>
+                <a href="modifier-offre.php?id=<?= $o['id'] ?>" class="btn btn-outline btn-sm"></a>
+                <a href="?toggle=<?= $o['id'] ?>" class="btn btn-sm" style="background:<?= $o['status']==='active'?'#fef9c3;color:#854d0e':'#dcfce7;color:#166534' ?>"><?= $o['status']==='active'?'':'' ?></a>
+                <a href="?delete=<?= $o['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Supprimer cette offre ?')"></a>
               </div>
             </td>
           </tr>
