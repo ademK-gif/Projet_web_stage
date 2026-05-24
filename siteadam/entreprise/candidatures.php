@@ -34,7 +34,7 @@ $offers_select = $offers_list->fetchAll();
 <div class="dash-layout">
   <?php include '../includes/sidebar_company.php'; ?>
   <div class="dash-content">
-    <div class="dash-header"><h1>👥 Gestion des candidatures</h1><span style="color:var(--muted)"><?= count($apps) ?> candidature(s)</span></div>
+    <div class="dash-header"><h1> Gestion des candidatures</h1><span style="color:var(--muted)"><?= count($apps) ?> candidature(s)</span></div>
     <div class="dash-body">
 
       <div class="filters-bar" style="margin-bottom:1.5rem">
@@ -52,10 +52,10 @@ $offers_select = $offers_list->fetchAll();
             <label>Statut</label>
             <select name="status" onchange="this.form.submit()">
               <option value="">Tous</option>
-              <option value="pending" <?= $filter_status==='pending'?'selected':'' ?>>⏳ En attente</option>
-              <option value="reviewed" <?= $filter_status==='reviewed'?'selected':'' ?>>👀 En examen</option>
-              <option value="accepted" <?= $filter_status==='accepted'?'selected':'' ?>>✅ Accepté</option>
-              <option value="rejected" <?= $filter_status==='rejected'?'selected':'' ?>>❌ Refusé</option>
+              <option value="pending" <?= $filter_status==='pending'?'selected':'' ?>> En attente</option>
+              <option value="reviewed" <?= $filter_status==='reviewed'?'selected':'' ?>> En examen</option>
+              <option value="accepted" <?= $filter_status==='accepted'?'selected':'' ?>> Accepté</option>
+              <option value="rejected" <?= $filter_status==='rejected'?'selected':'' ?>> Refusé</option>
             </select>
           </div>
           <a href="candidatures.php" class="btn btn-outline btn-sm">Réinitialiser</a>
@@ -63,7 +63,7 @@ $offers_select = $offers_list->fetchAll();
       </div>
 
       <?php if(empty($apps)): ?>
-      <div class="empty-state"><div class="empty-icon">📭</div><h3>Aucune candidature</h3><p>Vos candidatures apparaîtront ici.</p></div>
+      <div class="empty-state"><div class="empty-icon"></div><h3>Aucune candidature</h3><p>Vos candidatures apparaîtront ici.</p></div>
       <?php else: ?>
       <div style="display:grid;grid-template-columns:1fr 380px;gap:1.5rem">
         <div class="table-wrap">
@@ -77,7 +77,7 @@ $offers_select = $offers_list->fetchAll();
                 <div style="font-size:.8rem;color:var(--muted)"><?= htmlspecialchars($a['sector']??'') ?></div>
               </td>
               <td style="font-size:.88rem"><?= htmlspecialchars($a['offer_title']) ?></td>
-              <td><span class="badge badge-<?= $a['status'] ?>"><?= ['pending'=>'⏳ Nouveau','reviewed'=>'👀 En examen','accepted'=>'✅ Accepté','rejected'=>'❌ Refusé'][$a['status']] ?></span></td>
+              <td><span class="badge badge-<?= $a['status'] ?>"><?= ['pending'=>' Nouveau','reviewed'=>' En examen','accepted'=>' Accepté','rejected'=>' Refusé'][$a['status']] ?></span></td>
               <td style="font-size:.82rem;color:var(--muted)"><?= date('d/m/Y',strtotime($a['applied_at'])) ?></td>
               <td><a href="?app=<?= $a['id'] ?><?= $filter_offer?'&offer='.$filter_offer:'' ?>" class="btn btn-outline btn-sm">Voir</a></td>
             </tr>
@@ -100,24 +100,24 @@ $offers_select = $offers_list->fetchAll();
           <?php endif; ?>
 
           <?php if($sel['cover_letter']): ?>
-          <h4 style="margin-bottom:.5rem;font-size:.9rem">📝 Lettre de motivation</h4>
+          <h4 style="margin-bottom:.5rem;font-size:.9rem"> Lettre de motivation</h4>
           <div style="padding:1rem;background:#fafafa;border-radius:var(--radius);font-size:.85rem;line-height:1.7;margin-bottom:1rem;border:1px solid var(--border)"><?= nl2br(htmlspecialchars($sel['cover_letter'])) ?></div>
           <?php endif; ?>
 
           <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem">
-            <?php if($sel['cv_path']): ?><a href="/siteadam/uploads/<?= htmlspecialchars($sel['cv_path']) ?>" class="btn btn-outline btn-sm" target="_blank">📄 CV</a><?php endif; ?>
-            <?php if($sel['portfolio_url']): ?><a href="<?= htmlspecialchars($sel['portfolio_url']) ?>" class="btn btn-outline btn-sm" target="_blank">🌐 Portfolio</a><?php endif; ?>
-            <a href="/siteadam/entreprise/messages.php?with=<?= $pdo->query("SELECT user_id FROM student_profiles WHERE id=".$sel['student_id'])->fetchColumn() ?>" class="btn btn-outline btn-sm">💬 Message</a>
+            <?php if($sel['cv_path']): ?><a href="/siteadam/uploads/<?= htmlspecialchars($sel['cv_path']) ?>" class="btn btn-outline btn-sm" target="_blank"> CV</a><?php endif; ?>
+            <?php if($sel['portfolio_url']): ?><a href="<?= htmlspecialchars($sel['portfolio_url']) ?>" class="btn btn-outline btn-sm" target="_blank"> Portfolio</a><?php endif; ?>
+            <a href="/siteadam/entreprise/messages.php?with=<?= $pdo->query("SELECT user_id FROM student_profiles WHERE id=".$sel['student_id'])->fetchColumn() ?>" class="btn btn-outline btn-sm">Message</a>
           </div>
 
           <form method="POST">
             <input type="hidden" name="app_id" value="<?= $sel['id'] ?>">
             <div class="form-group"><label>Changer le statut</label>
               <select name="status">
-                <option value="pending" <?= $sel['status']==='pending'?'selected':'' ?>>⏳ En attente</option>
-                <option value="reviewed" <?= $sel['status']==='reviewed'?'selected':'' ?>>👀 En examen</option>
-                <option value="accepted" <?= $sel['status']==='accepted'?'selected':'' ?>>✅ Accepter</option>
-                <option value="rejected" <?= $sel['status']==='rejected'?'selected':'' ?>>❌ Refuser</option>
+                <option value="pending" <?= $sel['status']==='pending'?'selected':'' ?>> En attente</option>
+                <option value="reviewed" <?= $sel['status']==='reviewed'?'selected':'' ?>>En examen</option>
+                <option value="accepted" <?= $sel['status']==='accepted'?'selected':'' ?>>Accepter</option>
+                <option value="rejected" <?= $sel['status']==='rejected'?'selected':'' ?>> Refuser</option>
               </select>
             </div>
             <button type="submit" class="btn btn-primary btn-sm">Mettre à jour</button>
@@ -125,7 +125,7 @@ $offers_select = $offers_list->fetchAll();
         </div>
         <?php else: ?>
         <div class="card" style="display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted)">
-          <div><div style="font-size:3rem;margin-bottom:1rem">👆</div><p>Sélectionnez une candidature<br>pour voir les détails.</p></div>
+          <div><div style="font-size:3rem;margin-bottom:1rem"></div><p>Sélectionnez une candidature<br>pour voir les détails.</p></div>
         </div>
         <?php endif; ?>
       </div>
