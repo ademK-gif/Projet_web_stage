@@ -5,7 +5,6 @@ $cp = $pdo->prepare("SELECT id FROM company_profiles WHERE user_id=?");
 $cp->execute([$_SESSION['user_id']]);
 $cid = $cp->fetchColumn();
 
-// Update status
 if($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['app_id'])) {
     $pdo->prepare("UPDATE applications SET status=? WHERE id=? AND offer_id IN (SELECT id FROM job_offers WHERE company_id=?)")
         ->execute([$_POST['status'], $_POST['app_id'], $cid]);
@@ -38,7 +37,6 @@ $offers_select = $offers_list->fetchAll();
     <div class="dash-header"><h1>👥 Gestion des candidatures</h1><span style="color:var(--muted)"><?= count($apps) ?> candidature(s)</span></div>
     <div class="dash-body">
 
-      <!-- Filters -->
       <div class="filters-bar" style="margin-bottom:1.5rem">
         <form method="GET" style="display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-end">
           <div class="filter-group">
@@ -68,7 +66,6 @@ $offers_select = $offers_list->fetchAll();
       <div class="empty-state"><div class="empty-icon">📭</div><h3>Aucune candidature</h3><p>Vos candidatures apparaîtront ici.</p></div>
       <?php else: ?>
       <div style="display:grid;grid-template-columns:1fr 380px;gap:1.5rem">
-        <!-- List -->
         <div class="table-wrap">
           <table>
             <thead><tr><th>Candidat</th><th>Poste</th><th>Statut</th><th>Date</th><th>Action</th></tr></thead>
@@ -89,7 +86,6 @@ $offers_select = $offers_list->fetchAll();
           </table>
         </div>
 
-        <!-- Detail Panel -->
         <?php $sel = null; foreach($apps as $a) if($a['id']==$active_app) { $sel=$a; break; } ?>
         <?php if($sel): ?>
         <div class="card">
