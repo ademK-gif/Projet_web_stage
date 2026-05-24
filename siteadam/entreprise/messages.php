@@ -29,7 +29,7 @@ if($active_id) {
 <div class="dash-layout">
   <?php include '../includes/sidebar_company.php'; ?>
   <div class="dash-content">
-    <div class="dash-header"><h1>💬 Messagerie</h1></div>
+    <div class="dash-header"><h1>Messagerie</h1></div>
     <div class="dash-body">
       <div class="msg-layout">
         <div class="msg-sidebar">
@@ -47,7 +47,7 @@ if($active_id) {
         </div>
         <div class="msg-body">
           <?php if($active_id && !empty($msgs)): ?>
-          <div class="msg-header-bar">💬 <?= htmlspecialchars($active_name) ?></div>
+          <div class="msg-header-bar"><?= htmlspecialchars($active_name) ?></div>
           <div class="msg-messages" id="msgs">
             <?php foreach($msgs as $m): ?>
             <div class="msg-bubble <?= $m['sender_id']==$_SESSION['user_id']?'msg-sent':'msg-recv' ?>">
@@ -59,11 +59,11 @@ if($active_id) {
           <form class="msg-input-bar" method="POST">
             <input type="hidden" name="receiver_id" value="<?= $active_id ?>">
             <input type="text" name="content" placeholder="Écrire un message..." autocomplete="off" required>
-            <button type="submit" class="btn btn-primary btn-sm">Envoyer ➤</button>
+            <button type="submit" class="btn btn-primary btn-sm">Envoyer </button>
           </form>
           <?php else: ?>
           <div style="flex:1;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted)">
-            <div><div style="font-size:3rem;margin-bottom:1rem">💬</div><p>Sélectionnez une conversation<br>pour écrire un message.</p></div>
+            <div><div style="font-size:3rem;margin-bottom:1rem"></div><p>Sélectionnez une conversation<br>pour écrire un message.</p></div>
           </div>
           <?php endif; ?>
         </div>
