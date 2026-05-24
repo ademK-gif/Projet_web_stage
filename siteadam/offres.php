@@ -2,7 +2,6 @@
 require_once 'config/db.php';
 $page_title = 'Offres de Stage & Emploi - JobLink';
 
-// Filters
 $q       = trim($_GET['q'] ?? '');
 $sector  = $_GET['sector'] ?? '';
 $type    = $_GET['type'] ?? '';
@@ -27,7 +26,7 @@ include 'includes/header.php';
 
 <section class="page-hero">
   <div class="container">
-    <h1>🔍 Offres de Stage & Emploi</h1>
+    <h1> Offres de Stage & Emploi</h1>
     <p>Découvrez <?= count($offres) ?> opportunités adaptées à votre profil</p>
   </div>
 </section>
@@ -35,7 +34,6 @@ include 'includes/header.php';
 <div class="section" style="padding-top:2rem">
   <div class="container">
 
-    <!-- FILTERS -->
     <div class="filters-bar">
       <form method="GET" style="display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-end">
         <div class="filter-group" style="flex:2;min-width:200px">
@@ -68,10 +66,9 @@ include 'includes/header.php';
       </form>
     </div>
 
-    <!-- RESULTS -->
     <?php if(empty($offres)): ?>
     <div class="empty-state">
-      <div class="empty-icon">😕</div>
+      <div class="empty-icon"></div>
       <h3>Aucune offre trouvée</h3>
       <p>Modifiez vos critères de recherche ou revenez plus tard.</p>
       <a href="offres.php" class="btn btn-primary" style="margin-top:1rem">Voir toutes les offres</a>
@@ -89,10 +86,10 @@ include 'includes/header.php';
           </div>
         </div>
         <div class="job-tags">
-          <span class="tag tag-type"><?= $o['offer_type']==='stage'?'🎓 Stage':'💼 Emploi' ?></span>
-          <?php if($o['location']): ?><span class="tag tag-location">📍 <?= htmlspecialchars($o['location']) ?></span><?php endif; ?>
-          <?php if($o['remuneration']): ?><span class="tag tag-salary">💰 <?= htmlspecialchars($o['remuneration']) ?></span><?php endif; ?>
-          <?php if($o['duration']): ?><span class="tag tag-duration">⏱ <?= htmlspecialchars($o['duration']) ?></span><?php endif; ?>
+          <span class="tag tag-type"><?= $o['offer_type']==='stage'?' Stage':' Emploi' ?></span>
+          <?php if($o['location']): ?><span class="tag tag-location"> <?= htmlspecialchars($o['location']) ?></span><?php endif; ?>
+          <?php if($o['remuneration']): ?><span class="tag tag-salary"><?= htmlspecialchars($o['remuneration']) ?></span><?php endif; ?>
+          <?php if($o['duration']): ?><span class="tag tag-duration"> <?= htmlspecialchars($o['duration']) ?></span><?php endif; ?>
         </div>
         <p style="font-size:.88rem;color:var(--muted);line-height:1.5"><?= htmlspecialchars(substr($o['description'],0,100)) ?>...</p>
         <div class="job-card-footer">
