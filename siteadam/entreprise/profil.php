@@ -29,14 +29,14 @@ if($_SERVER['REQUEST_METHOD']==='POST') {
 <div class="dash-layout">
   <?php include '../includes/sidebar_company.php'; ?>
   <div class="dash-content">
-    <div class="dash-header"><h1>🏢 Profil Entreprise</h1></div>
+    <div class="dash-header"><h1>Profil Entreprise</h1></div>
     <div class="dash-body">
-      <?php if($success): ?><div class="alert alert-success">✅ <?= $success ?></div><?php endif; ?>
+      <?php if($success): ?><div class="alert alert-success"> <?= $success ?></div><?php endif; ?>
       <div class="profile-header">
         <div class="profile-avatar"><?= strtoupper(substr($company['company_name'],0,1)) ?></div>
         <h2><?= htmlspecialchars($company['company_name']) ?></h2>
         <p><?= htmlspecialchars($company['sector']??'Secteur non défini') ?> · <?= htmlspecialchars($company['location']??'Localisation non définie') ?></p>
-        <?php if($company['website_url']): ?><a href="<?= htmlspecialchars($company['website_url']) ?>" target="_blank" style="color:rgba(255,255,255,.8);font-size:.9rem;margin-top:.5rem;display:inline-block">🌐 <?= htmlspecialchars($company['website_url']) ?></a><?php endif; ?>
+        <?php if($company['website_url']): ?><a href="<?= htmlspecialchars($company['website_url']) ?>" target="_blank" style="color:rgba(255,255,255,.8);font-size:.9rem;margin-top:.5rem;display:inline-block"><?= htmlspecialchars($company['website_url']) ?></a><?php endif; ?>
       </div>
       <div class="card" style="max-width:700px">
         <form method="POST" enctype="multipart/form-data">
@@ -55,9 +55,9 @@ if($_SERVER['REQUEST_METHOD']==='POST') {
           <div class="form-group"><label>Site web</label><input type="url" name="website_url" value="<?= htmlspecialchars($company['website_url']??'') ?>" placeholder="https://www.monentreprise.tn"></div>
           <div class="form-group"><label>Description de l'entreprise</label><textarea name="description" rows="5" placeholder="Présentez votre entreprise, votre culture, vos valeurs..."><?= htmlspecialchars($company['description']??'') ?></textarea></div>
           <div class="form-group"><label>Logo (image)</label><input type="file" name="logo" accept="image/*">
-            <?php if($company['logo_path']): ?><small style="color:var(--success)">✅ Logo actuel : <?= htmlspecialchars($company['logo_path']) ?></small><?php endif; ?>
+            <?php if($company['logo_path']): ?><small style="color:var(--success)">Logo actuel : <?= htmlspecialchars($company['logo_path']) ?></small><?php endif; ?>
           </div>
-          <button type="submit" class="btn btn-primary">💾 Enregistrer les modifications</button>
+          <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
         </form>
       </div>
     </div>
