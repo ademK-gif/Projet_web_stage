@@ -44,10 +44,10 @@ $cands = $candidates->fetchAll();
 <div class="dash-layout">
   <?php include '../includes/sidebar_company.php'; ?>
   <div class="dash-content">
-    <div class="dash-header"><h1>📅 Agenda des entretiens</h1></div>
+    <div class="dash-header"><h1> Agenda des entretiens</h1></div>
     <div class="dash-body">
-      <?php if($success): ?><div class="alert alert-success">✅ <?= $success ?></div><?php endif; ?>
-      <?php if($error): ?><div class="alert alert-error">⚠️ <?= htmlspecialchars($error) ?></div><?php endif; ?>
+      <?php if($success): ?><div class="alert alert-success"> <?= $success ?></div><?php endif; ?>
+      <?php if($error): ?><div class="alert alert-error"> <?= htmlspecialchars($error) ?></div><?php endif; ?>
 
       <div style="display:grid;grid-template-columns:1fr 360px;gap:1.5rem">
         <div>
@@ -55,10 +55,10 @@ $cands = $candidates->fetchAll();
           $upcoming = array_filter($interviews, fn($i) => $i['status']==='scheduled' && $i['scheduled_at'] >= date('Y-m-d H:i:s'));
           $past     = array_filter($interviews, fn($i) => $i['status']!=='scheduled' || $i['scheduled_at'] < date('Y-m-d H:i:s'));
           ?>
-          <h3 style="margin-bottom:1rem;font-size:1rem">🔜 Entretiens à venir (<?= count($upcoming) ?>)</h3>
+          <h3 style="margin-bottom:1rem;font-size:1rem"> Entretiens à venir (<?= count($upcoming) ?>)</h3>
           <?php if(empty($upcoming)): ?>
           <div class="card" style="text-align:center;padding:2rem;color:var(--muted);margin-bottom:1.5rem">
-            <div style="font-size:2.5rem;margin-bottom:.75rem">📆</div>
+            <div style="font-size:2.5rem;margin-bottom:.75rem"></div>
             <p>Aucun entretien planifié prochainement.</p>
           </div>
           <?php else: ?>
@@ -68,18 +68,18 @@ $cands = $candidates->fetchAll();
               <div>
                 <div style="font-weight:700"><?= htmlspecialchars($i['first_name'].' '.$i['last_name']) ?></div>
                 <div style="color:var(--muted);font-size:.85rem;margin:.2rem 0"><?= htmlspecialchars($i['title']) ?></div>
-                <div style="color:var(--primary);font-weight:600;font-size:.9rem">📅 <?= date('d/m/Y à H:i',strtotime($i['scheduled_at'])) ?></div>
-                <div style="color:var(--muted);font-size:.85rem;margin-top:.25rem">📍 <?= htmlspecialchars($i['location_or_link']) ?></div>
+                <div style="color:var(--primary);font-weight:600;font-size:.9rem"> <?= date('d/m/Y à H:i',strtotime($i['scheduled_at'])) ?></div>
+                <div style="color:var(--muted);font-size:.85rem;margin-top:.25rem"> <?= htmlspecialchars($i['location_or_link']) ?></div>
                 <?php if($i['notes']): ?><div style="font-size:.82rem;color:var(--muted);margin-top:.35rem;font-style:italic"><?= htmlspecialchars($i['notes']) ?></div><?php endif; ?>
               </div>
-              <a href="?cancel=<?= $i['id'] ?>" class="btn btn-sm" style="background:#fee2e2;color:#991b1b;font-size:.8rem" onclick="return confirm('Annuler cet entretien ?')">❌ Annuler</a>
+              <a href="?cancel=<?= $i['id'] ?>" class="btn btn-sm" style="background:#fee2e2;color:#991b1b;font-size:.8rem" onclick="return confirm('Annuler cet entretien ?')"> Annuler</a>
             </div>
           </div>
           <?php endforeach; ?>
           <?php endif; ?>
 
           <?php if(!empty($past)): ?>
-          <h3 style="margin:1.5rem 0 1rem;font-size:1rem">📜 Historique (<?= count($past) ?>)</h3>
+          <h3 style="margin:1.5rem 0 1rem;font-size:1rem"> Historique (<?= count($past) ?>)</h3>
           <?php foreach($past as $i): ?>
           <div class="agenda-card" style="border-color:var(--border);opacity:.7">
             <div style="font-weight:600;font-size:.9rem"><?= htmlspecialchars($i['first_name'].' '.$i['last_name']) ?> — <?= htmlspecialchars($i['title']) ?></div>
@@ -90,7 +90,7 @@ $cands = $candidates->fetchAll();
         </div>
 
         <div class="card" style="height:fit-content;position:sticky;top:80px">
-          <h3 style="margin-bottom:1.25rem">➕ Planifier un entretien</h3>
+          <h3 style="margin-bottom:1.25rem"> Planifier un entretien</h3>
           <form method="POST">
             <input type="hidden" name="add_interview" value="1">
             <div class="form-group"><label>Candidat *</label>
@@ -101,10 +101,10 @@ $cands = $candidates->fetchAll();
                 <?php endforeach; ?>
               </select>
             </div>
-            <div class="form-group"><label>📅 Date & heure *</label><input type="datetime-local" name="scheduled_at" required></div>
-            <div class="form-group"><label>📍 Lieu / Lien *</label><input type="text" name="location_or_link" placeholder="Bureau, Zoom, Google Meet..." required></div>
-            <div class="form-group"><label>📝 Notes (optionnel)</label><textarea name="notes" rows="3" placeholder="Instructions, documents à apporter..."></textarea></div>
-            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">📅 Planifier l'entretien</button>
+            <div class="form-group"><label> Date & heure *</label><input type="datetime-local" name="scheduled_at" required></div>
+            <div class="form-group"><label> Lieu / Lien *</label><input type="text" name="location_or_link" placeholder="Bureau, Zoom, Google Meet..." required></div>
+            <div class="form-group"><label> Notes (optionnel)</label><textarea name="notes" rows="3" placeholder="Instructions, documents à apporter..."></textarea></div>
+            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center"> Planifier l'entretien</button>
           </form>
         </div>
       </div>
