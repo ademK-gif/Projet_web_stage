@@ -7,7 +7,7 @@ $cid = $cp->fetchColumn();
 
 $success = $error = '';
 
-// Add interview
+
 if($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['add_interview'])) {
     $aid = intval($_POST['application_id']);
     $dt  = $_POST['scheduled_at'] ?? '';
@@ -15,7 +15,6 @@ if($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['add_interview'])) {
     $notes = trim($_POST['notes'] ?? '');
     if(!$aid || !$dt || !$loc) { $error = 'Veuillez remplir tous les champs obligatoires.'; }
     else {
-        // Verify app belongs to this company
         $chk = $pdo->prepare("SELECT a.id FROM applications a JOIN job_offers jo ON a.offer_id=jo.id WHERE a.id=? AND jo.company_id=?");
         $chk->execute([$aid,$cid]);
         if($chk->fetch()) {
@@ -26,18 +25,15 @@ if($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['add_interview'])) {
     }
 }
 
-// Cancel interview
 if(isset($_GET['cancel'])) {
     $pdo->prepare("UPDATE interviews SET status='cancelled' WHERE id=? AND application_id IN (SELECT a.id FROM applications a JOIN job_offers jo ON a.offer_id=jo.id WHERE jo.company_id=?)")->execute([intval($_GET['cancel']),$cid]);
     header('Location: agenda.php'); exit;
 }
 
-// Get all interviews
 $ints = $pdo->prepare("SELECT i.*,jo.title,sp.first_name,sp.last_name,a.id as app_id FROM interviews i JOIN applications a ON i.application_id=a.id JOIN job_offers jo ON a.offer_id=jo.id JOIN student_profiles sp ON a.student_id=sp.id WHERE jo.company_id=? ORDER BY i.scheduled_at DESC");
 $ints->execute([$cid]);
 $interviews = $ints->fetchAll();
 
-// Candidates for dropdown
 $candidates = $pdo->prepare("SELECT a.id,sp.first_name,sp.last_name,jo.title FROM applications a JOIN job_offers jo ON a.offer_id=jo.id JOIN student_profiles sp ON a.student_id=sp.id WHERE jo.company_id=? AND a.status IN ('pending','reviewed') ORDER BY sp.last_name");
 $candidates->execute([$cid]);
 $cands = $candidates->fetchAll();
@@ -54,7 +50,6 @@ $cands = $candidates->fetchAll();
       <?php if($error): ?><div class="alert alert-error">⚠️ <?= htmlspecialchars($error) ?></div><?php endif; ?>
 
       <div style="display:grid;grid-template-columns:1fr 360px;gap:1.5rem">
-        <!-- LIST -->
         <div>
           <?php
           $upcoming = array_filter($interviews, fn($i) => $i['status']==='scheduled' && $i['scheduled_at'] >= date('Y-m-d H:i:s'));
@@ -94,7 +89,6 @@ $cands = $candidates->fetchAll();
           <?php endif; ?>
         </div>
 
-        <!-- FORM -->
         <div class="card" style="height:fit-content;position:sticky;top:80px">
           <h3 style="margin-bottom:1.25rem">➕ Planifier un entretien</h3>
           <form method="POST">
