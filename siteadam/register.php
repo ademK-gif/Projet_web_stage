@@ -47,22 +47,22 @@ include 'includes/header.php';
 
 <div class="auth-page" style="background:linear-gradient(135deg,#eef2ff,#fce7f3);min-height:calc(100vh - 64px)">
   <div class="auth-card" style="max-width:520px">
-    <h2>Créer un compte 🎉</h2>
+    <h2>Créer un compte </h2>
     <p class="subtitle">Rejoignez des milliers d'étudiants et d'entreprises</p>
 
-    <?php if($error): ?><div class="alert alert-error">⚠️ <?= htmlspecialchars($error) ?></div><?php endif; ?>
+    <?php if($error): ?><div class="alert alert-error"> <?= htmlspecialchars($error) ?></div><?php endif; ?>
 
     <form method="POST">
       <input type="hidden" name="role" id="role-input" value="<?= htmlspecialchars($role) ?>">
 
       <div class="role-selector">
         <div class="role-card <?= $role==='student'?'active':'' ?>" onclick="setRole('student',this)">
-          <div class="role-icon">👨‍🎓</div>
+          <div class="role-icon"></div>
           <h4>Étudiant</h4>
           <p style="font-size:.8rem;color:var(--muted)">Je cherche un stage/emploi</p>
         </div>
         <div class="role-card <?= $role==='company'?'active':'' ?>" onclick="setRole('company',this)">
-          <div class="role-icon">🏢</div>
+          <div class="role-icon"></div>
           <h4>Entreprise</h4>
           <p style="font-size:.8rem;color:var(--muted)">Je publie des offres</p>
         </div>
