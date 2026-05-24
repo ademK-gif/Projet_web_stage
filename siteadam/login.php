@@ -29,11 +29,11 @@ include 'includes/header.php';
 
 <div class="auth-page" style="background:linear-gradient(135deg,#eef2ff,#fce7f3);min-height:calc(100vh - 64px)">
   <div class="auth-card">
-    <h2>Bon retour ! 👋</h2>
+    <h2>Bon retour ! </h2>
     <p class="subtitle">Connectez-vous pour accéder à votre espace</p>
 
-    <?php if($error): ?><div class="alert alert-error">⚠️ <?= htmlspecialchars($error) ?></div><?php endif; ?>
-    <?php if(isset($_GET['registered'])): ?><div class="alert alert-success">✅ Compte créé avec succès ! Connectez-vous.</div><?php endif; ?>
+    <?php if($error): ?><div class="alert alert-error"> <?= htmlspecialchars($error) ?></div><?php endif; ?>
+    <?php if(isset($_GET['registered'])): ?><div class="alert alert-success"> Compte créé avec succès ! Connectez-vous.</div><?php endif; ?>
 
     <form method="POST">
       <div class="form-group"><label>Adresse email</label><input type="email" name="email" placeholder="vous@exemple.com" required autofocus></div>
