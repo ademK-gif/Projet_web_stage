@@ -24,18 +24,18 @@ if($_SERVER['REQUEST_METHOD']==='POST') {
 <div class="dash-layout">
   <?php include '../includes/sidebar_company.php'; ?>
   <div class="dash-content">
-    <div class="dash-header"><h1>➕ Publier une nouvelle offre</h1></div>
+    <div class="dash-header"><h1>Publier une nouvelle offre</h1></div>
     <div class="dash-body">
       <div class="card" style="max-width:780px">
-        <?php if($error): ?><div class="alert alert-error">⚠️ <?= htmlspecialchars($error) ?></div><?php endif; ?>
+        <?php if($error): ?><div class="alert alert-error"> <?= htmlspecialchars($error) ?></div><?php endif; ?>
         <form method="POST">
           <div class="form-group"><label>Titre du poste *</label><input type="text" name="title" placeholder="Ex: Développeur Web Full-Stack" required value="<?= htmlspecialchars($_POST['title']??'') ?>"></div>
 
           <div class="form-row">
             <div class="form-group"><label>Type d'offre *</label>
               <select name="offer_type">
-                <option value="stage" <?= ($_POST['offer_type']??'')==='stage'?'selected':'' ?>>🎓 Stage</option>
-                <option value="emploi" <?= ($_POST['offer_type']??'')==='emploi'?'selected':'' ?>>💼 Emploi</option>
+                <option value="stage" <?= ($_POST['offer_type']??'')==='stage'?'selected':'' ?>> Stage</option>
+                <option value="emploi" <?= ($_POST['offer_type']??'')==='emploi'?'selected':'' ?>>Emploi</option>
               </select>
             </div>
             <div class="form-group"><label>Secteur</label>
@@ -49,18 +49,18 @@ if($_SERVER['REQUEST_METHOD']==='POST') {
           </div>
 
           <div class="form-row">
-            <div class="form-group"><label>📍 Localisation</label><input type="text" name="location" placeholder="Tunis, Sfax, Télétravail..." value="<?= htmlspecialchars($_POST['location']??'') ?>"></div>
-            <div class="form-group"><label>⏱ Durée</label><input type="text" name="duration" placeholder="Ex: 3 mois, CDI, CDD 1 an..." value="<?= htmlspecialchars($_POST['duration']??'') ?>"></div>
+            <div class="form-group"><label>Localisation</label><input type="text" name="location" placeholder="Tunis, Sfax, Télétravail..." value="<?= htmlspecialchars($_POST['location']??'') ?>"></div>
+            <div class="form-group"><label>Durée</label><input type="text" name="duration" placeholder="Ex: 3 mois, CDI, CDD 1 an..." value="<?= htmlspecialchars($_POST['duration']??'') ?>"></div>
           </div>
 
-          <div class="form-group"><label>💰 Rémunération</label><input type="text" name="remuneration" placeholder="Ex: 400 DT/mois, À négocier..." value="<?= htmlspecialchars($_POST['remuneration']??'') ?>"></div>
+          <div class="form-group"><label>Rémunération</label><input type="text" name="remuneration" placeholder="Ex: 400 DT/mois, À négocier..." value="<?= htmlspecialchars($_POST['remuneration']??'') ?>"></div>
 
           <div class="form-group"><label>Description du poste *</label>
             <textarea name="description" rows="8" placeholder="Décrivez le poste, les missions, les compétences requises et les avantages..." required><?= htmlspecialchars($_POST['description']??'') ?></textarea>
           </div>
 
           <div style="display:flex;gap:1rem">
-            <button type="submit" class="btn btn-primary">🚀 Publier l'offre</button>
+            <button type="submit" class="btn btn-primary">Publier l'offre</button>
             <a href="offres.php" class="btn btn-outline">Annuler</a>
           </div>
         </form>
