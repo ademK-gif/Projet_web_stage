@@ -5,13 +5,11 @@ $sp = $pdo->prepare("SELECT id FROM student_profiles WHERE user_id=?");
 $sp->execute([$_SESSION['user_id']]);
 $sid = $sp->fetchColumn();
 
-// Send message
 if($_SERVER['REQUEST_METHOD']==='POST' && !empty($_POST['content']) && !empty($_POST['receiver_id'])) {
     $pdo->prepare("INSERT INTO messages (sender_id,receiver_id,content) VALUES (?,?,?)")
         ->execute([$_SESSION['user_id'], $_POST['receiver_id'], trim($_POST['content'])]);
 }
 
-// Conversations (distinct companies we've talked to)
 $convs = $pdo->prepare("SELECT DISTINCT u.id,cp.company_name as name, (SELECT content FROM messages WHERE (sender_id=? AND receiver_id=u.id) OR (sender_id=u.id AND receiver_id=?) ORDER BY sent_at DESC LIMIT 1) as last_msg FROM messages m JOIN users u ON (u.id=m.sender_id OR u.id=m.receiver_id) JOIN company_profiles cp ON cp.user_id=u.id WHERE (m.sender_id=? OR m.receiver_id=?) AND u.id!=? GROUP BY u.id");
 $convs->execute([$_SESSION['user_id'],$_SESSION['user_id'],$_SESSION['user_id'],$_SESSION['user_id'],$_SESSION['user_id']]);
 $conversations = $convs->fetchAll();
@@ -34,10 +32,9 @@ if($active_id) {
 <div class="dash-layout">
   <?php include '../includes/sidebar_student.php'; ?>
   <div class="dash-content">
-    <div class="dash-header"><h1>💬 Messagerie</h1></div>
+    <div class="dash-header"><h1> Messagerie</h1></div>
     <div class="dash-body">
       <div class="msg-layout">
-        <!-- Sidebar conversations -->
         <div class="msg-sidebar">
           <div style="padding:1rem;border-bottom:1px solid var(--border);font-weight:700;font-size:.9rem">Conversations</div>
           <?php if(empty($conversations)): ?>
@@ -51,10 +48,9 @@ if($active_id) {
           <?php endforeach; ?>
           <?php endif; ?>
         </div>
-        <!-- Chat area -->
         <div class="msg-body">
           <?php if($active_id && !empty($msgs)): ?>
-          <div class="msg-header-bar">💬 <?= htmlspecialchars($active_name) ?></div>
+          <div class="msg-header-bar"><?= htmlspecialchars($active_name) ?></div>
           <div class="msg-messages" id="msgs">
             <?php foreach($msgs as $m): ?>
             <div class="msg-bubble <?= $m['sender_id']==$_SESSION['user_id']?'msg-sent':'msg-recv' ?>">
@@ -66,11 +62,11 @@ if($active_id) {
           <form class="msg-input-bar" method="POST">
             <input type="hidden" name="receiver_id" value="<?= $active_id ?>">
             <input type="text" name="content" placeholder="Écrire un message..." autocomplete="off" required>
-            <button type="submit" class="btn btn-primary btn-sm">Envoyer ➤</button>
+            <button type="submit" class="btn btn-primary btn-sm">Envoyer </button>
           </form>
           <?php else: ?>
           <div class="empty-state" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center">
-            <div class="empty-icon">💬</div>
+            <div class="empty-icon"></div>
             <h3>Sélectionnez une conversation</h3>
             <p>Ou postulez à une offre pour démarrer une discussion.</p>
           </div>
