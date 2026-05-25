@@ -30,9 +30,9 @@ if($_SERVER['REQUEST_METHOD']==='POST') {
 <div class="dash-layout">
   <?php include '../includes/sidebar_student.php'; ?>
   <div class="dash-content">
-    <div class="dash-header"><h1>👤 Mon Profil</h1></div>
+    <div class="dash-header"><h1> Mon Profil</h1></div>
     <div class="dash-body">
-      <?php if($success): ?><div class="alert alert-success">✅ <?= $success ?></div><?php endif; ?>
+      <?php if($success): ?><div class="alert alert-success"><?= $success ?></div><?php endif; ?>
 
       <div class="profile-header">
         <div class="profile-avatar"><?= strtoupper(substr($profile['first_name'] ?? 'E', 0,1)) ?></div>
@@ -61,10 +61,10 @@ if($_SERVER['REQUEST_METHOD']==='POST') {
           <div class="form-row">
             <div class="form-group"><label>URL Portfolio / LinkedIn</label><input type="url" name="portfolio_url" value="<?= htmlspecialchars($profile['portfolio_url']??'') ?>" placeholder="https://..."></div>
             <div class="form-group"><label>CV (PDF)</label><input type="file" name="cv_file" accept=".pdf,.doc,.docx">
-              <?php if($profile['cv_path']): ?><small style="color:var(--success)">✅ CV actuel : <?= htmlspecialchars($profile['cv_path']) ?></small><?php endif; ?>
+              <?php if($profile['cv_path']): ?><small style="color:var(--success)">CV actuel : <?= htmlspecialchars($profile['cv_path']) ?></small><?php endif; ?>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">💾 Enregistrer les modifications</button>
+          <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
         </form>
       </div>
     </div>
